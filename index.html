@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<h2>GET TEST</h2>
+
+<table>
+    <tr>
+        <td><p>Response Text:</p></td><td><p id="responseText"></p></td>
+    </tr>
+    <tr>
+        <td><p>Key 1:</p></td><td><p id="key1">1</p></td>
+    </tr>
+    <tr>
+        <td><p>Key 2:</p></td><td><p id="key2">1</p></td>
+    </tr>
+    <tr>
+        <td><p>Key 3:</p></td><td><p id="key3">1</p></td>
+    </tr>
+    <tr>
+        <td><p>Key 4:</p></td><td><p id="key4">1</p></td>
+    </tr>
+</table>
+
+<script>
+
+    for (var i = 0; i < 1; i++) {
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("responseText").innerHTML = xhttp.responseText;
+                
+                //TODO: Process JSON
+                var jsonResponse = JSON.parse(xhttp.responseText);
+                document.getElementById("key1").innerHTML = jsonResponse["key1"];
+                document.getElementById("key2").innerHTML = jsonResponse["key2"];
+                document.getElementById("key3").innerHTML = jsonResponse["key3"];
+                document.getElementById("key4").innerHTML = jsonResponse["key4"];
+                
+            }
+        };
+
+        xhttp.open("GET", "http://127.0.0.1:1234", true);
+        xhttp.send();
+    }    
+</script>
+
+</body>
+</html>
